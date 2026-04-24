@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>About — Outside The City</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="Our mission, the reality we're responding to, Life Resume Experiences, and the team behind Outside The City." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .about-hero { padding: 100px 40px 60px; }
+  .about-hero-inner { max-width: 1200px; margin: 0 auto; }
+  .about-hero h1 { font-size: 108px; margin-top: 20px; line-height: 0.92; letter-spacing: -0.03em; max-width: 1000px; }
+
+  .hero-img-section { padding: 0 40px 60px; }
+  .hero-img { max-width: 1280px; margin: 0 auto; height: 520px; border-radius: 20px;
+    background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&q=70');
+    background-size: cover; background-position: center;
+    position: relative;
+  }
+
+  .mission-section { padding: 40px 40px 100px; }
+  .mission-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; max-width: 1200px; margin: 0 auto; }
+  .mission-grid h2 { font-size: 44px; margin-top: 16px; letter-spacing: -0.02em; line-height: 1.05; }
+  .mission-grid p { font-size: 16px; line-height: 1.75; color: var(--ink-2); }
+  .mission-grid p + p { margin-top: 18px; }
+
+  .stats-section { padding: 100px 40px; background: var(--paper-2); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+  .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.3fr; gap: 80px; align-items: start; }
+  .stats-grid h2 { font-size: 60px; margin-top: 16px; letter-spacing: -0.02em; line-height: 0.98; }
+  .stats-source { margin-top: 32px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); letter-spacing: 0.08em; }
+  .stat-row {
+    display: grid; grid-template-columns: 180px 1fr; gap: 32px;
+    padding: 24px 0; border-top: 1px solid var(--hairline);
+    align-items: baseline;
+  }
+  .stat-row:last-child { border-bottom: 1px solid var(--hairline); }
+  .stat-n { font-family: var(--font-display); font-size: 52px; line-height: 1; letter-spacing: -0.02em; }
+  .stat-l { font-size: 16px; color: var(--ink-2); line-height: 1.5; }
+
+  .why-section { padding: 120px 40px; }
+  .why-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: center; }
+  .why-img {
+    height: 560px; border-radius: 20px; position: relative;
+    background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1000&q=70');
+    background-size: cover; background-position: center;
+  }
+  .why-img-label { position: absolute; bottom: 24px; left: 24px; color: var(--paper); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
+  .why-h { font-size: 68px; letter-spacing: -0.02em; margin-top: 14px; line-height: 0.98; }
+  .why-lede { font-size: 17px; line-height: 1.65; margin-top: 28px; color: var(--ink-2); }
+  .coined-callout {
+    margin-top: 24px; padding: 28px 32px;
+    background: var(--cream); border: 1px solid var(--hairline);
+    border-left: 4px solid var(--ember);
+    border-radius: 0 14px 14px 0;
+  }
+  .coined-title { font-family: var(--font-display); font-size: 36px; line-height: 1.05; letter-spacing: -0.01em; }
+  .coined-body { font-size: 14px; line-height: 1.6; margin-top: 14px; color: var(--ink-2); }
+
+  .gallery-section { padding: 40px 40px 100px; }
+  .gallery-strip { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+  .gallery-cell { height: 200px; border-radius: 8px; background-size: cover; background-position: center; }
+  .gallery-note { margin-top: 24px; font-size: 13px; color: var(--ink-muted); max-width: 680px; line-height: 1.6; }
+
+  .team-section { padding: 100px 40px; background: var(--paper-2); }
+  .team-inner { max-width: 1280px; margin: 0 auto; }
+  .team-header { display: flex; justify-content: space-between; align-items: end; margin-bottom: 48px; gap: 32px; }
+  .team-header h2 { font-size: 72px; letter-spacing: -0.02em; margin-top: 14px; line-height: 0.98; }
+  .team-header p { max-width: 360px; font-size: 14px; color: var(--ink-muted); line-height: 1.5; }
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .team-card { background: var(--cream); border-radius: 20px; overflow: hidden; border: 1px solid var(--hairline); }
+  .team-photo { height: 320px; background-size: cover; background-position: center; }
+  .team-body { padding: 28px; }
+  .team-name { font-family: var(--font-display); font-size: 30px; letter-spacing: -0.01em; }
+  .team-role { font-size: 12px; color: var(--ember); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+  .team-bio { font-size: 14px; line-height: 1.6; margin-top: 16px; color: var(--ink-2); }
+  .advisory-row {
+    margin-top: 40px; padding: 28px;
+    background: var(--cream); border: 1px solid var(--hairline); border-radius: 20px;
+    display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+  }
+  .advisory-name { font-family: var(--font-display); font-size: 26px; letter-spacing: -0.01em; }
+
+  .closing-section { padding: 120px 40px; background: var(--ink); color: var(--paper); }
+  .closing-inner { max-width: 780px; margin: 0 auto; text-align: center; }
+  .closing-inner h2 { color: var(--paper); font-size: 72px; margin-top: 14px; letter-spacing: -0.02em; line-height: 0.98; }
+  .closing-buttons { display: flex; gap: 12px; justify-content: center; margin-top: 40px; flex-wrap: wrap; }
+  .closing-btn-outline { border: 1px solid rgba(245,239,228,0.3); color: var(--paper); }
+  .closing-btn-outline:hover { background: rgba(245,239,228,0.1); }
+
+  @media (max-width: 960px) {
+    .about-hero { padding: 60px 24px 40px; }
+    .about-hero h1 { font-size: 56px; }
+    .mission-grid, .stats-grid, .why-grid, .team-header, .team-grid { grid-template-columns: 1fr; gap: 32px; }
+    .mission-section, .stats-section, .why-section, .team-section, .closing-section { padding: 60px 24px; }
+    .stats-grid h2 { font-size: 40px; }
+    .why-h, .closing-inner h2 { font-size: 48px; }
+    .gallery-strip { grid-template-columns: repeat(3, 1fr); }
+    .stat-row { grid-template-columns: 1fr; gap: 8px; }
+    .stat-n { font-size: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="otc-nav">
+  <a class="otc-logo" href="index.html">
+    <span class="otc-logo-mark">o</span>
+    <span>Outside The City</span>
+  </a>
+  <div class="otc-nav-links">
+    <a href="index.html">Home</a>
+    <a class="active" href="about.html">About</a>
+    <a href="involved.html">Get Involved</a>
+    <a href="contact.html">Contact</a>
+    <a href="donate.html">Donate</a>
+  </div>
+  <div class="otc-nav-cta">
+    <a class="otc-btn otc-btn-ghost" href="involved.html">Volunteer</a>
+    <a class="otc-btn otc-btn-ember" href="donate.html">Donate →</a>
+  </div>
+</nav>
+
+<section class="about-hero">
+  <div class="about-hero-inner">
+    <div class="otc-eyebrow">About · founded 2022 · Orange · San Diego · Los Angeles</div>
+    <h1>Adventure is our approach.<br/><span class="italic ember">Transformation is our goal.</span></h1>
+  </div>
+</section>
+
+<section class="hero-img-section">
+  <div class="hero-img"></div>
+</section>
+
+<section class="mission-section">
+  <div class="mission-grid">
+    <div>
+      <div class="otc-eyebrow">Our mission</div>
+      <h2>To give formerly gang-involved and previously incarcerated men and women the chance to rewrite their stories — one life-changing experience at a time.</h2>
+    </div>
+    <div>
+      <p>Our outdoor programs immerse participants in challenges that push limits, build confidence, and ignite renewed purpose. For many, it's their first time hiking rugged trails, kayaking open waters, navigating overland 4×4 terrain, or sleeping under a star-filled sky far from city lights.</p>
+      <p>Beyond adventure, we provide mentorship, guidance, and support — helping participants translate the courage and skills they gain outdoors into lasting change. They return with more than memories. They return with hope, determination, and a vision for a better future.</p>
+      <p>Our outings build mental toughness, leadership, teamwork, stress management, and practical skills like navigation and endurance — alongside access to environments most participants have never imagined they belonged in.</p>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section">
+  <div class="stats-grid">
+    <div>
+      <div class="otc-eyebrow">— The reality we're responding to</div>
+      <h2>Gang involvement<br/>in the U.S.</h2>
+      <div class="stats-source">SOURCE · U.S. DEPARTMENT OF JUSTICE</div>
+    </div>
+    <div>
+      <div class="stat-row">
+        <div class="stat-n" style="color: var(--ember);">21,500+</div>
+        <div class="stat-l">gangs active across the United States</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-n" style="color: var(--moss);">731,000</div>
+        <div class="stat-l">members nationwide</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-n" style="color: var(--ink);">12–24</div>
+        <div class="stat-l">ages most heavily recruited — often where family support is thin</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-n" style="color: var(--stone);">Age 15</div>
+        <div class="stat-l">median age of first involvement, leading to cycles of trauma and incarceration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why-section">
+  <div class="why-grid">
+    <div class="why-img">
+      <div class="why-img-label">NEAR ZABRISKIE POINT · DEATH VALLEY NP</div>
+    </div>
+    <div>
+      <div class="otc-eyebrow">Why recreation?</div>
+      <h2 class="why-h">Not escape.<br/><span class="italic ember">Reintegration.</span></h2>
+      <p class="why-lede">
+        For many who've faced incarceration, these moments represent far more than a break from routine. They're what we call —
+      </p>
+      <div class="coined-callout">
+        <div class="otc-eyebrow" style="color: var(--ember); margin-bottom: 10px;">A coined phrase</div>
+        <div class="coined-title">"Life Resume Experiences."</div>
+        <p class="coined-body">
+          Milestones that help redefine identity, build confidence, and reconnect with the world in positive, transformative ways. They become part of a new personal narrative — an expanded life resume that goes beyond what's written on paper.
+        </p>
+      </div>
+      <p style="font-size:15px; line-height:1.65; margin-top:24px; color: var(--ink-muted);">
+        Standing at the edge of a canyon. Kayaking a still bay at sunrise. Sharing stories around a fire in a desert camp. Each moment builds not just a memory, but a sense of self-worth and direction.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="gallery-section">
+  <div style="max-width:1280px; margin:0 auto;">
+    <div class="gallery-strip">
+      <div class="gallery-cell" style="background-image:url('https://images.unsplash.com/photo-1533240332313-0db49b459ad6?w=1200&q=70');"></div>
+      <div class="gallery-cell" style="background-image:url('https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=1200&q=70');"></div>
+      <div class="gallery-cell" style="background-image:url('https://images.unsplash.com/photo-1475088092121-32f11f0632f8?w=1200&q=70');"></div>
+      <div class="gallery-cell" style="background-image:url('https://images.unsplash.com/photo-1590579491624-f98f36d4c763?w=1200&q=70');"></div>
+      <div class="gallery-cell" style="background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&q=70');"></div>
+      <div class="gallery-cell" style="background-image:url('https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=1400&q=70');"></div>
+    </div>
+    <p class="gallery-note">
+      We capture every outing through photography, video, and drone footage — honoring the resilience and transformation, and celebrating the milestones.
+    </p>
+  </div>
+</section>
+
+<section class="team-section" id="team">
+  <div class="team-inner">
+    <div class="team-header">
+      <div>
+        <div class="otc-eyebrow">Meet the team</div>
+        <h2>The crew.</h2>
+      </div>
+      <p>A startup veteran, a storyteller, a finance lead — and an advisor holding it all honest.</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=70');"></div>
+        <div class="team-body">
+          <div class="team-name">Scott Swift</div>
+          <div class="team-role">Founder</div>
+          <p class="team-bio">Startup veteran with for-profit and non-profit experience — began his career at World Vision Relief. Founded Outside The City in 2022. His love of the outdoors started young on California and Baja beaches, then followed him into the Southwest on foot. Proud father of a son with autism and epilepsy.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo" style="background-image:url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=70');"></div>
+        <div class="team-body">
+          <div class="team-name">Darren Porter</div>
+          <div class="team-role">Advocate · Storytelling</div>
+          <p class="team-bio">Three decades in advertising, marketing, and video production — from sports documentaries to reality TV. An avid surfer and mountain biker, super-connected across the adventure sports industry. Mentorship is near and dear to him; "showing people a new way to live and having it stick" is, in his words, the most rewarding work there is.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo" style="background-image:url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=70');"></div>
+        <div class="team-body">
+          <div class="team-name">Corey Swift</div>
+          <div class="team-role">Finance · Operations</div>
+          <p class="team-bio">Controller at a $50M privately-held California company — responsible for all finance and accounting. Graduate of the University of Arkansas, military veteran deployed to Afghanistan, seasoned traveler and hiker who walks five miles a day just to stay sharp.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="advisory-row">
+      <div class="otc-eyebrow" style="min-width:140px;">Advisory</div>
+      <div class="advisory-name">Stephen Chee</div>
+      <div style="flex:1; font-size:13px; color:var(--ink-muted); line-height:1.55; min-width:200px;">
+        Lends strategic counsel across program design and organizational growth.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closing-section">
+  <div class="closing-inner">
+    <div class="otc-eyebrow" style="color: rgba(245,239,228,0.5);">— Join us in creating lasting impact</div>
+    <h2>One <span class="italic ember">Life Resume Experience</span> at a time.</h2>
+    <div class="closing-buttons">
+      <a class="otc-btn otc-btn-ember otc-btn-lg" href="donate.html">Sponsor an outing →</a>
+      <a class="otc-btn otc-btn-lg closing-btn-outline" href="involved.html">Volunteer</a>
+    </div>
+  </div>
+</section>
+
+<footer class="otc-footer">
+  <div class="otc-footer-grid">
+    <div>
+      <h2 class="otc-footer-cta-h">
+        Adventure. Healing.<br/>
+        <span class="italic">Second chances.</span>
+      </h2>
+      <p style="font-size:13px; color:rgba(245,239,228,0.6); margin-bottom:20px; max-width:380px; line-height:1.55;">
+        Monthly updates from the field. First outings, first summits, first stars.
+      </p>
+      <form class="otc-footer-subscribe" onsubmit="event.preventDefault();">
+        <input class="otc-input" placeholder="your@email.com" type="email" required />
+        <button class="otc-btn otc-btn-ember" type="submit">Subscribe</button>
+      </form>
+    </div>
+    <div>
+      <div class="otc-eyebrow" style="color: rgba(245,239,228,0.5); margin-bottom: 14px;">Explore</div>
+      <div style="display:grid; gap:8px;">
+        <a href="about.html">About</a>
+        <a href="about.html#team">Team</a>
+        <a href="involved.html">Get Involved</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="otc-eyebrow" style="color: rgba(245,239,228,0.5); margin-bottom: 14px;">Support</div>
+      <div style="display:grid; gap:8px;">
+        <a href="donate.html">Donate</a>
+        <a href="donate.html#product">Product donations</a>
+        <a href="involved.html">Volunteer</a>
+        <a href="involved.html#corporate">Corporate sponsors</a>
+      </div>
+    </div>
+    <div>
+      <div class="otc-eyebrow" style="color: rgba(245,239,228,0.5); margin-bottom: 14px;">Reach us</div>
+      <div style="display:grid; gap:8px;">
+        <a href="mailto:info@outsidethecity.org">info@outsidethecity.org</a>
+        <a href="contact.html">Press</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://twitter.com" target="_blank" rel="noopener">Twitter / X</a>
+      </div>
+    </div>
+  </div>
+  <div class="otc-footer-legal">
+    <div style="display:flex; gap:24px; flex-wrap:wrap;">
+      <span>© 2026 Outside The City</span>
+      <span>Powered by Teen Health, Inc. · 501(c)(3) · EIN 87-4628884</span>
+    </div>
+    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+      <a href="#">Terms of Service</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Refund Policy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

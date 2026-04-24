@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Get Involved — Outside The City</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="Volunteer, donate products, or partner as a corporate sponsor. Five volunteer roles + deep CSR engagement." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .involved-hero { padding: 100px 40px 60px; }
+  .involved-hero-inner { max-width: 1200px; margin: 0 auto; }
+  .involved-hero h1 { font-size: 108px; margin-top: 20px; letter-spacing: -0.03em; line-height: 0.92; }
+  .involved-hero-lede { font-size: 19px; color: var(--ink-2); margin-top: 28px; max-width: 700px; line-height: 1.55; }
+
+  .paths-section { padding: 20px 40px 80px; }
+  .paths-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .path-card { display: flex; flex-direction: column; border: 1px solid var(--hairline); border-radius: 20px; overflow: hidden; background: var(--cream); }
+  .path-img { height: 200px; position: relative; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 14px; }
+  .path-img::before { content:""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 60%); }
+  .path-img-label { background: rgba(0,0,0,0.35); color: rgba(245,239,228,0.95); padding: 4px 8px; border-radius: 6px; backdrop-filter: blur(4px); position: relative; z-index:1; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .path-body { padding: 28px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+  .path-body h3 { font-size: 34px; letter-spacing: -0.01em; }
+  .path-body .sub { font-size: 14px; color: var(--ink-muted); line-height: 1.55; }
+  .path-list { display: grid; gap: 10px; margin: 8px 0 0; }
+  .path-list li { font-size: 13px; color: var(--ink-2); padding-left: 16px; position: relative; }
+  .path-list li::before { content:""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--ember); }
+  .path-body .otc-btn { margin-top: auto; align-self: flex-start; }
+
+  .roles-section { padding: 100px 40px; background: var(--paper-2); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+  .roles-inner { max-width: 1280px; margin: 0 auto; }
+  .roles-header { display: flex; justify-content: space-between; align-items: end; margin-bottom: 48px; gap: 32px; }
+  .roles-header h2 { font-size: 72px; letter-spacing: -0.02em; margin-top: 14px; line-height: 0.98; }
+  .roles-header p { max-width: 380px; font-size: 14px; color: var(--ink-muted); line-height: 1.55; }
+  .roles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .role {
+    padding: 32px 36px;
+    border-top: 1px solid var(--hairline);
+    display: flex; gap: 24px; align-items: flex-start;
+    background: var(--cream);
+  }
+  .role.open { background: transparent; }
+  .role:nth-child(odd) { border-right: 1px solid var(--hairline); }
+  .role:nth-child(n+5) { border-bottom: 1px solid var(--hairline); }
+  .role-icon { font-family: var(--font-display); font-size: 32px; color: var(--ember); min-width: 40px; line-height: 1; }
+  .role-body { flex: 1; }
+  .role-name { font-family: var(--font-display); font-size: 28px; letter-spacing: -0.01em; }
+  .role-desc { font-size: 14px; color: var(--ink-muted); margin-top: 8px; line-height: 1.6; }
+
+  .corp-section { padding: 120px 40px; }
+  .corp-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
+  .corp-sticky { position: sticky; top: 100px; }
+  .corp-sticky h2 { font-size: 68px; letter-spacing: -0.02em; margin-top: 14px; line-height: 0.98; }
+  .corp-sticky p { font-size: 16px; line-height: 1.65; margin-top: 28px; color: var(--ink-2); }
+  .engagement-row {
+    padding: 28px 0; border-bottom: 1px solid var(--hairline);
+    display: grid; grid-template-columns: 40px 1fr; gap: 24px; align-items: start;
+  }
+  .engagement-row .n { font-family: var(--font-mono); font-size: 11px; color: var(--ember); letter-spacing: 0.12em; }
+  .engagement-row .t { font-family: var(--font-display); font-size: 24px; letter-spacing: -0.01em; }
+  .engagement-row .d { font-size: 14px; color: var(--ink-muted); margin-top: 8px; line-height: 1.6; }
+  .partner-callout { margin-top: 32px; padding: 28px; background: var(--ink); color: var(--paper); border-radius: 20px; }
+  .partner-callout p { font-size: 15px; line-height: 1.65; color: rgba(245,239,228,0.85); }
+
+  .current-sponsors { padding: 80px 40px; background: var(--cream); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); text-align: center; }
+  .current-sponsors h2 { font-size: 40px; margin-top: 14px; letter-spacing: -0.02em; }
+  .current-sponsors-row { margin-top: 40px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; align-items: center; justify-items: center; }
+  .current-sponsors-row span { font-family: var(--font-display); font-size: 22px; color: var(--ink-muted); letter-spacing: 0.02em; }
+
+  .closing-section { padding: 120px 40px; background: var(--ink); color: var(--paper); text-align: center; }
+  .closing-inner { max-width: 780px; margin: 0 auto; }
+  .closing-inner h2 { color: var(--paper); font-size: 72px; letter-spacing: -0.02em; line-height: 0.98; }
+  .closing-inner p { font-size: 17px; margin-top: 24px; color: rgba(245,239,228,0.75); max-width: 540px; margin-left: auto; margin-right: auto; }
+  .closing-buttons { display: flex; gap: 12px; justify-content: center; margin-top: 40px; flex-wrap: wrap; }
+  .closing-btn-outline { border: 1px solid rgba(245,239,228,0.3); color: var(--paper); }
+  .closing-btn-outline:hover { background: rgba(245,239,228,0.1); }
+
+  @media (max-width: 960px) {
+    .involved-hero { padding: 60px 24px 32px; }
+    .involved-hero h1 { font-size: 56px; }
+    .paths-grid, .roles-grid, .corp-grid, .current-sponsors-row { grid-template-columns: 1fr; gap: 16px; }
+    .role { border-right: none !important; }
+    .roles-header h2, .corp-sticky h2, .closing-inner h2 { font-size: 44px; }
+    .roles-section, .corp-section, .current-sponsors, .closing-section { padding: 60px 24px; }
+    .corp-sticky { position: static; }
+    .roles-header { flex-direction: column; align-items: start; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="otc-nav">
+  <a class="otc-logo" href="index.html">
+    <span class="otc-logo-mark">o</span>
+    <span>Outside The City</span>
+  </a>
+  <div class="otc-nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a class="active" href="involved.html">Get Involved</a>
+    <a href="contact.html">Contact</a>
+    <a href="donate.html">Donate</a>
+  </div>
+  <div class="otc-nav-cta">
+    <a class="otc-btn otc-btn-ghost" href="involved.html">Volunteer</a>
+    <a class="otc-btn otc-btn-ember" href="donate.html">Donate →</a>
+  </div>
+</nav>
+
+<section class="involved-hero">
+  <div class="involved-hero-inner">
+    <div class="otc-eyebrow">Get Involved · Orange · San Diego · Los Angeles · and beyond</div>
+    <h1>Join us in the<br/><span class="italic ember">great outdoors.</span></h1>
+    <p class="involved-hero-lede">
+      Whether you're guiding a trail, helping on the water, or encouraging someone to take their first step
+      into the wild — you'll be creating unforgettable experiences and making a real impact.
+    </p>
+  </div>
+</section>
+
+<section class="paths-section">
+  <div class="paths-grid">
+    <div class="path-card">
+      <div class="path-img" style="background-image:url('https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=1200&q=70');">
+        <span class="path-img-label">01 · volunteer</span>
+      </div>
+      <div class="path-body">
+        <div class="otc-eyebrow">01</div>
+        <h3>Volunteer</h3>
+        <p class="sub">Join us on outings across Orange, San Diego, and LA Counties.</p>
+        <ul class="path-list">
+          <li>Lead outings</li>
+          <li>Share life experience</li>
+          <li>Support water activities</li>
+          <li>Mentor on-trail</li>
+        </ul>
+        <a class="otc-btn otc-btn-primary" href="#roles">See open roles →</a>
+      </div>
+    </div>
+
+    <div class="path-card">
+      <div class="path-img" style="background-image:url('https://images.unsplash.com/photo-1551632811-561732d1e306?w=1200&q=70');">
+        <span class="path-img-label">02 · donate products</span>
+      </div>
+      <div class="path-body">
+        <div class="otc-eyebrow">02</div>
+        <h3>Donate Products</h3>
+        <p class="sub">New or used demo gear, equipment, and bikes inspire someone to explore the world.</p>
+        <ul class="path-list">
+          <li>Tents & sleeping bags</li>
+          <li>Hiking & trail shoes</li>
+          <li>Kayaks, paddles, PFDs</li>
+          <li>Bikes (any condition)</li>
+        </ul>
+        <a class="otc-btn otc-btn-primary" href="donate.html#product">Ship a donation →</a>
+      </div>
+    </div>
+
+    <div class="path-card">
+      <div class="path-img" style="background-image:url('https://images.unsplash.com/photo-1551632811-561732d1e306?w=1400&q=70');">
+        <span class="path-img-label">03 · corporate sponsor</span>
+      </div>
+      <div class="path-body">
+        <div class="otc-eyebrow">03</div>
+        <h3>Corporate Sponsor</h3>
+        <p class="sub">Scalable, credible CSR with measurable outcomes.</p>
+        <ul class="path-list">
+          <li>Program sponsorship</li>
+          <li>Employee volunteer days</li>
+          <li>Skills-based engagement</li>
+          <li>Long-term program support</li>
+        </ul>
+        <a class="otc-btn otc-btn-primary" href="contact.html">Talk to us →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="roles-section" id="roles">
+  <div class="roles-inner">
+    <div class="roles-header">
+      <div>
+        <div class="otc-eyebrow">Open volunteer roles</div>
+        <h2>Five kinds of<br/>help we need.</h2>
+      </div>
+      <p>Experience matters more in some roles than others. Life experience matters in all of them.</p>
+    </div>
+
+    <div class="roles-grid">
+      <div class="role">
+        <div class="role-icon">⛰</div>
+        <div class="role-body">
+          <div class="role-name">Wilderness Guides</div>
+          <p class="role-desc">Lead, teach, and inspire participants in rugged outdoor environments.</p>
+          <a class="otc-btn otc-btn-ghost otc-btn-sm" style="padding:0; margin-top:14px;" href="contact.html">Apply →</a>
+        </div>
+      </div>
+      <div class="role">
+        <div class="role-icon">◎</div>
+        <div class="role-body">
+          <div class="role-name">Team Builders</div>
+          <p class="role-desc">Facilitate group dynamics and run outdoor adventure programs.</p>
+          <a class="otc-btn otc-btn-ghost otc-btn-sm" style="padding:0; margin-top:14px;" href="contact.html">Apply →</a>
+        </div>
+      </div>
+      <div class="role">
+        <div class="role-icon">⟶</div>
+        <div class="role-body">
+          <div class="role-name">Endurance Athletes</div>
+          <p class="role-desc">Support participants through challenging and exciting activities.</p>
+          <a class="otc-btn otc-btn-ghost otc-btn-sm" style="padding:0; margin-top:14px;" href="contact.html">Apply →</a>
+        </div>
+      </div>
+      <div class="role">
+        <div class="role-icon">✦</div>
+        <div class="role-body">
+          <div class="role-name">Seniors</div>
+          <p class="role-desc">Bring life experience, patience, and mentorship while being part of the adventure.</p>
+          <a class="otc-btn otc-btn-ghost otc-btn-sm" style="padding:0; margin-top:14px;" href="contact.html">Apply →</a>
+        </div>
+      </div>
+      <div class="role">
+        <div class="role-icon">~</div>
+        <div class="role-body">
+          <div class="role-name">Lifeguards</div>
+          <p class="role-desc">Ensure water safety and enthusiasm during paddle, kayak, and boating activities.</p>
+          <a class="otc-btn otc-btn-ghost otc-btn-sm" style="padding:0; margin-top:14px;" href="contact.html">Apply →</a>
+        </div>
+      </div>
+      <div class="role open">
+        <div class="role-icon">+</div>
+        <div class="role-body">
+          <div class="role-name">Your skill here</div>
+          <p class="role-desc">Have something else to bring? A trade, a story, a calming voice? Say hi.</p>
+          <a class="otc-btn otc-btn-ghost otc-btn-sm" style="padding:0; margin-top:14px;" href="contact.html">Tell us →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="corp-section" id="corporate">
+  <div class="corp-grid">
+    <div class="corp-sticky">
+      <div class="otc-eyebrow">Corporate partners</div>
+      <h2>Scalable,<br/>credible<br/><span class="italic ember">CSR.</span></h2>
+      <p>We partner with companies seeking CSR initiatives that deliver measurable social outcomes — aligned to community reinvestment, workforce development, and public safety priorities.</p>
+      <a class="otc-btn otc-btn-ember" style="margin-top:28px;" href="contact.html">Start a partnership →</a>
+    </div>
+
+    <div>
+      <div class="engagement-row">
+        <div class="n">01</div>
+        <div>
+          <div class="t">Program sponsorship</div>
+          <div class="d">Fund an outing end-to-end. Your brand shows up on every participant's first-ever summit photo.</div>
+        </div>
+      </div>
+      <div class="engagement-row">
+        <div class="n">02</div>
+        <div>
+          <div class="t">Employee volunteer days</div>
+          <div class="d">Team-on-trail days that double as skills-based engagement — real impact, real bonding.</div>
+        </div>
+      </div>
+      <div class="engagement-row">
+        <div class="n">03</div>
+        <div>
+          <div class="t">Skills-based engagement</div>
+          <div class="d">Finance, legal, marketing, ops — send your specialists for high-leverage pro bono work.</div>
+        </div>
+      </div>
+      <div class="engagement-row">
+        <div class="n">04</div>
+        <div>
+          <div class="t">Long-term program support</div>
+          <div class="d">Multi-year commitments that let us plan 24 months out. Preferred for enterprise partners.</div>
+        </div>
+      </div>
+      <div class="engagement-row">
+        <div class="n">05</div>
+        <div>
+          <div class="t">Co-branded storytelling</div>
+          <div class="d">Authentic narratives with photography, video, and drone footage from every outing.</div>
+        </div>
+      </div>
+      <div class="engagement-row">
+        <div class="n">06</div>
+        <div>
+          <div class="t">Matching programs</div>
+          <div class="d">Employee-giving match lift — often the single biggest donor growth lever we see.</div>
+        </div>
+      </div>
+
+      <div class="partner-callout">
+        <div class="otc-eyebrow" style="color: var(--ember); margin-bottom: 12px;">What partners get back</div>
+        <p>
+          Clear impact reporting. Outcome measurement. Authentic narratives that help organizations demonstrate accountability, strengthen stakeholder trust, and translate CSR commitments into sustained community impact.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="current-sponsors">
+  <div class="container">
+    <div class="otc-eyebrow">— In good company</div>
+    <h2>Current sponsors.</h2>
+    <div class="current-sponsors-row">
+      <span>Orgain</span>
+      <span>TMR</span>
+      <span>Carlson</span>
+      <span>Outward Bound</span>
+      <span>PE Partners</span>
+    </div>
+  </div>
+</section>
+
+<section class="closing-section">
+  <div class="closing-inner">
+    <h2>Creating life-changing<br/><span class="italic ember">experiences.</span></h2>
+    <p>If you love the outdoors and want to give back, we'd love to have you on the team.</p>
+    <div class="closing-buttons">
+      <a class="otc-btn otc-btn-ember otc-btn-lg" href="contact.html">Volunteer →</a>
+      <a class="otc-btn otc-btn-lg closing-btn-outline" href="donate.html">Donate</a>
+    </div>
+  </div>
+</section>
+
+<footer class="otc-footer">
+  <div class="otc-footer-grid">
+    <div>
+      <h2 class="otc-footer-cta-h">
+        Adventure. Healing.<br/>
+        <span class="italic">Second chances.</span>
+      </h2>
+      <p style="font-size:13px; color:rgba(245,239,228,0.6); margin-bottom:20px; max-width:380px; line-height:1.55;">
+        Monthly updates from the field. First outings, first summits, first stars.
+      </p>
+      <form class="otc-footer-subscribe" onsubmit="event.preventDefault();">
+        <input class="otc-input" placeholder="your@email.com" type="email" required />
+        <button class="otc-btn otc-btn-ember" type="submit">Subscribe</button>
+      </form>
+    </div>
+    <div>
+      <div class="otc-eyebrow" style="color: rgba(245,239,228,0.5); margin-bottom: 14px;">Explore</div>
+      <div style="display:grid; gap:8px;">
+        <a href="about.html">About</a>
+        <a href="about.html#team">Team</a>
+        <a href="involved.html">Get Involved</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="otc-eyebrow" style="color: rgba(245,239,228,0.5); margin-bottom: 14px;">Support</div>
+      <div style="display:grid; gap:8px;">
+        <a href="donate.html">Donate</a>
+        <a href="donate.html#product">Product donations</a>
+        <a href="involved.html">Volunteer</a>
+        <a href="involved.html#corporate">Corporate sponsors</a>
+      </div>
+    </div>
+    <div>
+      <div class="otc-eyebrow" style="color: rgba(245,239,228,0.5); margin-bottom: 14px;">Reach us</div>
+      <div style="display:grid; gap:8px;">
+        <a href="mailto:info@outsidethecity.org">info@outsidethecity.org</a>
+        <a href="contact.html">Press</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://twitter.com" target="_blank" rel="noopener">Twitter / X</a>
+      </div>
+    </div>
+  </div>
+  <div class="otc-footer-legal">
+    <div style="display:flex; gap:24px; flex-wrap:wrap;">
+      <span>© 2026 Outside The City</span>
+      <span>Powered by Teen Health, Inc. · 501(c)(3) · EIN 87-4628884</span>
+    </div>
+    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+      <a href="#">Terms of Service</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Refund Policy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

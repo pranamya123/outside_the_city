@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Donate — Outside The City</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="Fund a first. Fund a second chance. Monetary donations via Classy.org or product donations to our Southern California HQ." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .donate-hero { padding: 100px 40px 20px; }
+  .donate-hero-inner { max-width: 1200px; margin: 0 auto; }
+  .donate-hero h1 { font-size: 108px; margin-top: 18px; letter-spacing: -0.03em; line-height: 0.92; max-width: 1100px; }
+  .donate-hero-lede { font-size: 19px; color: var(--ink-2); margin-top: 28px; max-width: 680px; line-height: 1.55; }
+
+  .track-selector { padding: 40px 40px 0; }
+  .track-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .track-option {
+    padding: 28px 32px; border-radius: 20px;
+    border: 1.5px solid var(--hairline);
+    background: var(--cream);
+    display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+    text-align: left; cursor: pointer; transition: all .15s;
+    width: 100%; font: inherit;
+  }
+  .track-option:hover { border-color: var(--hairline-strong); }
+  .track-option[aria-selected="true"] {
+    border: 2px solid var(--ember);
+    background: rgba(200,106,63,0.06);
+    padding: 27px 31px;
+  }
+  .track-option .head { display: flex; justify-content: space-between; width: 100%; align-items: baseline; gap: 16px; }
+  .track-option .title { font-family: var(--font-display); font-size: 32px; letter-spacing: -0.01em; color: var(--ink); }
+  .track-option[aria-selected="true"] .title { color: var(--ember); }
+  .track-option .tag { font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); letter-spacing: 0.1em; }
+  .track-option .sub { font-size: 14px; color: var(--ink-muted); }
+
+  .track-panel { display: none; }
+  .track-panel.active { display: block; }
+
+  /* Monetary */
+  .monetary-section { padding: 40px 40px 80px; }
+  .monetary-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; }
+  .classy-card { border: 1px solid var(--hairline); border-radius: 24px; padding: 36px; background: var(--cream); }
+  .classy-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px; gap: 16px; flex-wrap: wrap; }
+  .classy-title { font-family: var(--font-display); font-size: 28px; letter-spacing: -0.01em; margin-top: 8px; }
+  .classy-campaign { font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); letter-spacing: 0.12em; }
+  .freq-tabs { display: flex; background: var(--paper-2); padding: 4px; border-radius: 999px; margin-bottom: 24px; width: fit-content; }
+  .freq-tabs button { padding: 10px 20px; font-size: 13px; color: var(--ink-muted); border-radius: 999px; }
+  .freq-tabs button[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+  .field-label { font-size: 11px; color: var(--ink-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .amounts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; margin-bottom: 16px; }
+  .amount {
+    padding: 20px 12px; border-radius: 14px;
+    border: 1.5px solid var(--hairline);
+    background: var(--paper);
+    display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+    cursor: pointer; text-align: left; transition: all .15s;
+  }
+  .amount:hover { border-color: var(--hairline-strong); }
+  .amount[aria-selected="true"] {
+    border: 2px solid var(--ember);
+    background: rgba(200,106,63,0.1);
+    padding: 19px 11px;
+  }
+  .amount .big { font-family: var(--font-display); font-size: 28px; letter-spacing: -0.01em; }
+  .amount .note { font-size: 11px; color: var(--ink-muted); }
+  .custom-amt { display: flex; align-items: center; gap: 12px; margin-top: 10px; margin-bottom: 24px; }
+  .custom-amt .sign { font-family: var(--font-display); font-size: 32px; color: var(--ink-muted); }
+  .classy-submit { width: 100%; justify-content: center; }
+  .classy-fine { font-size: 11px; color: var(--ink-muted); margin-top: 16px; line-height: 1.55; }
+
+  .impact-list { margin-top: 20px; display: grid; gap: 0; }
+  .impact-row {
+    padding: 22px 0; border-top: 1px solid var(--hairline);
+    display: grid; grid-template-columns: 160px 1fr; gap: 28px; align-items: baseline;
+  }
+  .impact-row .k { font-family: var(--font-display); font-size: 22px; letter-spacing: -0.01em; }
+  .impact-row .d { font-size: 14px; color: var(--ink-muted); line-height: 1.55; }
+
+  .other-ways { margin-top: 32px; padding: 24px; background: var(--ink); color: var(--paper); border-radius: 20px; }
+  .other-ways > div { display: grid; gap: 12px; font-size: 14px; color: rgba(245,239,228,0.85); }
+  .other-way { padding-bottom: 12px; border-bottom: 1px solid rgba(245,239,228,0.12); }
+  .other-way:last-child { padding-bottom: 0; border-bottom: none; }
+  .other-way .t { font-weight: 500; color: var(--paper); margin-bottom: 2px; }
+  .other-way .d { font-size: 13px; }
+
+  /* Product */
+  .product-section { padding: 40px 40px 80px; }
+  .product-inner { max-width: 1280px; margin: 0 auto; }
+  .product-intro { display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; margin-bottom: 48px; }
+  .product-intro h2 { font-size: 56px; letter-spacing: -0.02em; margin-top: 14px; line-height: 1; }
+  .product-intro p { font-size: 16px; line-height: 1.65; margin-top: 24px; color: var(--ink-2); }
+  .product-intro-img {
+    height: 320px; border-radius: 20px;
+    background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?w=1200&q=70');
+    background-size: cover; background-position: center;
+  }
+  .product-categories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .product-cat { border: 1px solid var(--hairline); border-radius: 20px; padding: 28px; background: var(--cream); }
+  .product-cat h3 { font-family: var(--font-display); font-size: 24px; letter-spacing: -0.01em; }
+  .product-cat ul { margin: 20px 0 0; display: grid; gap: 10px; }
+  .product-cat li { font-size: 14px; color: var(--ink-2); padding-left: 16px; position: relative; }
+  .product-cat li::before { content:""; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--ember); }
+  .product-how { margin-top: 60px; padding: 40px; background: var(--paper-2); border-radius: 24px; border: 1px solid var(--hairline); }
+  .product-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 24px; }
+  .product-step .n { font-family: var(--font-mono); font-size: 11px; color: var(--ember); letter-spacing: 0.12em; }
+  .product-step .t { font-family: var(--font-display); font-size: 24px; letter-spacing: -0.01em; margin-top: 8px; }
+  .product-step .d { font-size: 13px; color: var(--ink-muted); margin-top: 8px; line-height: 1.55; }
+  .product-actions { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .corp-trailer { padding: 100px 40px; background: var(--ink); color: var(--paper); }
+  .corp-trailer-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .corp-trailer h2 { color: var(--paper); font-size: 64px; letter-spacing: -0.02em; line-height: 0.98; margin-top: 14px; }
+  .corp-trailer p { font-size: 16px; line-height: 1.65; margin-top: 24px; color: rgba(245,239,228,0.75); max-width: 440px; }
+  .corp-logos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .corp-logo {
+    padding: 22px 24px; border-radius: 14px;
+    border: 1px solid rgba(245,239,228,0.12);
+    background: rgba(245,239,228,0.04);
+    font-family: var(--font-display); font-size: 20px; color: var(--paper);
+    letter-spacing: 0.02em;
+  }
+  .corp-logo.you { border: 1px dashed rgba(245,239,228,0.3); background: transparent; color: rgba(245,239,228,0.4); }
+
+  .legal-strip { padding: 40px; background: var(--paper-2); border-top: 1px solid var(--hairline); }
+  .legal-row { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 32px; align-items: center; }
+  .legal-name { font-family: var(--font-display); font-size: 22px; letter-spacing: -0.01em; }
+  .legal-name .mono { font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); margin-left: 16px; letter-spacing: 0.1em; }
+
+  @media (max-width: 960px) {
+    .donate-hero { padding: 60px 24px 0; }
+    .donate-hero h1 { font-size: 56px; }
+    .track-grid, .monetary-grid, .product-intro, .product-categories, .product-steps, .corp-trailer-inner, .corp-logos, .legal-row { grid-template-columns: 1fr; }
+    .monetary-section, .product-section, .corp-trailer, .legal-strip { padding: 48px 24px; }
+    .amounts { grid-template-columns: 1fr 1fr; }
+    .product-intro h2, .corp-trailer h2 { font-size: 40px; }
+    .legal-row { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="otc-nav">
+  <a class="otc-logo" href="index.html">
+    <span class="otc-logo-mark">o</span>
+    <span>Outside The City</span>
+  </a>
+  <div class="otc-nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="involved.html">Get Involved</a>
+    <a href="contact.html">Contact</a>
+    <a class="active" href="donate.html">Donate</a>
+  </div>
+  <div class="otc-nav-cta">
+    <a class="otc-btn otc-btn-ghost" href="involved.html">Volunteer</a>
+    <a class="otc-btn otc-btn-ember" href="donate.html">Donate →</a>
+  </div>
+</nav>
+
+<section class="donate-hero">
+  <div class="donate-hero-inner">
+    <div class="otc-eyebrow">Donate · 501(c)(3) · EIN 87-4628884 · tax-deductible</div>
+    <h1>Fund a first.<br/><span class="italic ember">Fund a second chance.</span></h1>
+    <p class="donate-hero-lede">
+      Every outing — the gear, the fuel, the permits, the guides — is funded by people and
+      companies who believe in second chances. Two ways to give:
+    </p>
+  </div>
+</section>
+
+<section class="track-selector">
+  <div class="track-grid">
+    <button class="track-option" data-track="monetary" aria-selected="true">
+      <div class="head">
+        <span class="title">Monetary donation</span>
+        <span class="tag">giving.classy.org</span>
+      </div>
+      <span class="sub">Dollars to fund outings, gear, and logistics.</span>
+    </button>
+    <button class="track-option" data-track="product" aria-selected="false">
+      <div class="head">
+        <span class="title">Product donation</span>
+        <span class="tag">ship to HQ</span>
+      </div>
+      <span class="sub">New or used demo gear, equipment, and bikes.</span>
+    </button>
+  </div>
+</section>
+
+<!-- MONETARY TRACK -->
+<section class="monetary-section track-panel active" id="panel-monetary">
+  <div class="monetary-grid">
+    <div class="classy-card">
+      <div class="classy-head">
+        <div>
+          <div class="otc-eyebrow">Secure donation · via Classy.org</div>
+          <div class="classy-title">Support our outings</div>
+        </div>
+        <div class="classy-campaign">CAMPAIGN · 628076</div>
+      </div>
+
+      <div class="freq-tabs" role="tablist">
+        <button type="button" aria-selected="true">Monthly</button>
+        <button type="button" aria-selected="false">One-time</button>
+      </div>
+
+      <div class="field-label">Choose an amount</div>
+      <div class="amounts" role="radiogroup" aria-label="Donation amount">
+        <button type="button" class="amount" data-amt="25" aria-selected="false">
+          <span class="big">$25</span><span class="note">Trail snacks</span>
+        </button>
+        <button type="button" class="amount" data-amt="100" aria-selected="false">
+          <span class="big">$100</span><span class="note">A meal for the crew</span>
+        </button>
+        <button type="button" class="amount" data-amt="500" aria-selected="true">
+          <span class="big">$500</span><span class="note">One participant's gear</span>
+        </button>
+        <button type="button" class="amount" data-amt="2500" aria-selected="false">
+          <span class="big">$2,500</span><span class="note">Sponsors an outing</span>
+        </button>
+      </div>
+
+      <div class="field-label">Or enter another amount</div>
+      <div class="custom-amt">
+        <span class="sign">$</span>
+        <input class="otc-input" placeholder="Custom" style="flex:1; font-family: var(--font-display); font-size: 22px;" inputmode="decimal" />
+      </div>
+
+      <a class="otc-btn otc-btn-ember otc-btn-lg classy-submit" href="https://giving.classy.org/campaign/628076/donate" target="_blank" rel="noopener">
+        Continue on Classy →
+      </a>
+      <p class="classy-fine">
+        You'll be taken to giving.classy.org to complete your donation securely. Outside The City
+        operates under Teen Health, Inc., a 501(c)(3). Your gift is tax-deductible to the extent
+        allowed by law.
+      </p>
+    </div>
+
+    <div>
+      <div class="otc-eyebrow">What your gift funds</div>
+      <div class="impact-list">
+        <div class="impact-row">
+          <div class="k">Gear kits</div>
+          <div class="d">Boots, packs, layers, sleeping systems.</div>
+        </div>
+        <div class="impact-row">
+          <div class="k">Fuel & logistics</div>
+          <div class="d">Vans, permits, campground fees, food.</div>
+        </div>
+        <div class="impact-row">
+          <div class="k">Guide compensation</div>
+          <div class="d">Experienced guides & lifeguards for each outing.</div>
+        </div>
+        <div class="impact-row">
+          <div class="k">Storytelling</div>
+          <div class="d">Photography, video, drone — every milestone captured.</div>
+        </div>
+      </div>
+
+      <div class="other-ways">
+        <div class="otc-eyebrow" style="color: var(--ember); margin-bottom: 10px;">Other ways to give</div>
+        <div>
+          <div class="other-way">
+            <div class="t">Employer matching</div>
+            <div class="d">We'll work with your HR to maximize impact.</div>
+          </div>
+          <div class="other-way">
+            <div class="t">Stock & DAF</div>
+            <div class="d">Transfer appreciated assets through your donor-advised fund.</div>
+          </div>
+          <div class="other-way">
+            <div class="t">Planned giving</div>
+            <div class="d">Include us in your estate.</div>
+          </div>
+        </div>
+        <a class="otc-btn otc-btn-ghost" style="color: var(--paper); padding: 0; margin-top: 16px;" href="contact.html">
+          Email us →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT TRACK -->
+<section class="product-section track-panel" id="panel-product">
+  <div class="product-inner" id="product">
+    <div class="product-intro">
+      <div>
+        <div class="otc-eyebrow">Product donations</div>
+        <h2>New or used gear.<br/><span class="italic ember">All of it helps.</span></h2>
+        <p>
+          Outdoor adventure gear, demo equipment, and bicycles all help bring first-time experiences
+          to our participants. A used mountain bike can inspire someone to explore the world.
+        </p>
+      </div>
+      <div class="product-intro-img"></div>
+    </div>
+
+    <div class="product-categories">
+      <div class="product-cat">
+        <h3>Camping & shelter</h3>
+        <ul>
+          <li>Tents (2p–6p)</li>
+          <li>Sleeping bags</li>
+          <li>Sleeping pads</li>
+          <li>Camp stoves & cookware</li>
+        </ul>
+      </div>
+      <div class="product-cat">
+        <h3>Hiking & apparel</h3>
+        <ul>
+          <li>Hiking boots / trail shoes</li>
+          <li>Backpacks (day + multi-day)</li>
+          <li>Rain shells & layers</li>
+          <li>Hats, gloves, headlamps</li>
+        </ul>
+      </div>
+      <div class="product-cat">
+        <h3>Water & wheels</h3>
+        <ul>
+          <li>Kayaks, paddles, PFDs</li>
+          <li>Stand-up paddle boards</li>
+          <li>Mountain bikes (any condition)</li>
+          <li>Bike helmets</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-how">
+      <div class="otc-eyebrow">How product donations work</div>
+      <div class="product-steps">
+        <div class="product-step">
+          <div class="n">01</div>
+          <div class="t">Reach out</div>
+          <div class="d">Email us a quick list of what you'd like to donate.</div>
+        </div>
+        <div class="product-step">
+          <div class="n">02</div>
+          <div class="t">We confirm</div>
+          <div class="d">We'll confirm fit and coordinate logistics within 48h.</div>
+        </div>
+        <div class="product-step">
+          <div class="n">03</div>
+          <div class="t">Ship or drop off</div>
+          <div class="d">Ship to our Southern California HQ, or drop off by appointment.</div>
+        </div>
+        <div class="product-step">
+          <div class="n">04</div>
+          <div class="t">Get a receipt</div>
+          <div class="d">Tax-deductible receipt issued within two business days.</div>
+        </div>
+      </div>
+      <div class="product-actions">
+        <a class="otc-btn otc-btn-ember otc-btn-lg" href="contact.html">Start a donation →</a>
+        <a class="otc-btn otc-btn-outline otc-btn-lg" href="contact.html">Questions? Email us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="corp-trailer">
+  <div class="corp-trailer-inner">
+    <div>
+      <div class="otc-eyebrow" style="color: rgba(245,239,228,0.5);">— For companies</div>
+      <h2>Ready for a bigger<br/><span class="italic ember">commitment?</span></h2>
+      <p>
+        We partner on program sponsorships, employee volunteer days, skills-based engagement,
+        matching, and multi-year commitments. Co-branded impact storytelling included.
+      </p>
+      <a class="otc-btn otc-btn-ember otc-btn-lg" style="margin-top:28px;" href="involved.html#corporate">
+        Corporate partnerships →
+      </a>
+    </div>
+    <div>
+      <div class="otc-eyebrow" style="color: rgba(245,239,228,0.5); margin-bottom: 20px;">In good company</div>
+      <div class="corp-logos">
+        <div class="corp-logo">Orgain</div>
+        <div class="corp-logo">TMR</div>
+        <div class="corp-logo">Carlson</div>
+        <div class="corp-logo">Outward Bound</div>
+        <div class="corp-logo">PE Partners</div>
+        <div class="corp-logo you">Your company</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="legal-strip">
+  <div class="legal-row">
+    <div class="otc-eyebrow">Powered by</div>
+    <div class="legal-name">
+      Teen Health, Inc.
+      <span class="mono">501(c)(3) · EIN 87-4628884</span>
+    </div>
+    <div style="font-size:12px; color:var(--ink-muted);">All donations tax-deductible</div>
+  </div>
+</section>
+
+<footer class="otc-footer">
+  <div class="otc-footer-grid">
+    <div>
+      <h2 class="otc-footer-cta-h">
+        Adventure. Healing.<br/>
+        <span class="italic">Second chances.</span>
+      </h2>
+      <p style="font-size:13px; color:rgba(245,239,228,0.6); margin-bottom:20px; max-width:380px; line-height:1.55;">
+        Monthly updates from the field. First outings, first summits, first stars.
+      </p>
+      <form class="otc-footer-subscribe" onsubmit="event.preventDefault();">
+        <input class="otc-input" placeholder="your@email.com" type="email" required />
+        <button class="otc-btn otc-btn-ember" type="submit">Subscribe</button>
+      </form>
+    </div>
+    <div>
+      <div class="otc-eyebrow" style="color: rgba(245,239,228,0.5); margin-bottom: 14px;">Explore</div>
+      <div style="display:grid; gap:8px;">
+        <a href="about.html">About</a>
+        <a href="about.html#team">Team</a>
+        <a href="involved.html">Get Involved</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="otc-eyebrow" style="color: rgba(245,239,228,0.5); margin-bottom: 14px;">Support</div>
+      <div style="display:grid; gap:8px;">
+        <a href="donate.html">Donate</a>
+        <a href="donate.html#product">Product donations</a>
+        <a href="involved.html">Volunteer</a>
+        <a href="involved.html#corporate">Corporate sponsors</a>
+      </div>
+    </div>
+    <div>
+      <div class="otc-eyebrow" style="color: rgba(245,239,228,0.5); margin-bottom: 14px;">Reach us</div>
+      <div style="display:grid; gap:8px;">
+        <a href="mailto:info@outsidethecity.org">info@outsidethecity.org</a>
+        <a href="contact.html">Press</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://twitter.com" target="_blank" rel="noopener">Twitter / X</a>
+      </div>
+    </div>
+  </div>
+  <div class="otc-footer-legal">
+    <div style="display:flex; gap:24px; flex-wrap:wrap;">
+      <span>© 2026 Outside The City</span>
+      <span>Powered by Teen Health, Inc. · 501(c)(3) · EIN 87-4628884</span>
+    </div>
+    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+      <a href="#">Terms of Service</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Refund Policy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Track switcher
+  const trackButtons = document.querySelectorAll('.track-option');
+  const panels = {
+    monetary: document.getElementById('panel-monetary'),
+    product:  document.getElementById('panel-product'),
+  };
+  function setTrack(t) {
+    trackButtons.forEach(b => b.setAttribute('aria-selected', b.dataset.track === t));
+    Object.entries(panels).forEach(([k, el]) => el.classList.toggle('active', k === t));
+  }
+  trackButtons.forEach(b => b.addEventListener('click', () => setTrack(b.dataset.track)));
+  if (location.hash === '#product') setTrack('product');
+
+  // Amount picker
+  const amtButtons = document.querySelectorAll('.amount');
+  amtButtons.forEach(b => b.addEventListener('click', () => {
+    amtButtons.forEach(x => x.setAttribute('aria-selected', x === b));
+  }));
+
+  // Frequency tabs
+  const freqButtons = document.querySelectorAll('.freq-tabs button');
+  freqButtons.forEach(b => b.addEventListener('click', () => {
+    freqButtons.forEach(x => x.setAttribute('aria-selected', x === b));
+  }));
+</script>
+
+</body>
+</html>

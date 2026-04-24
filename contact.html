@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Contact — Outside The City</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="Say hello. General, volunteer, corporate, product donations, and press inquiries." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .contact-hero { padding: 100px 40px 60px; max-width: 1200px; margin: 0 auto; }
+  .contact-hero-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 60px; align-items: end; }
+  .contact-hero h1 { font-size: 108px; line-height: 0.92; letter-spacing: -0.03em; margin-top: 18px; }
+  .contact-hero p { font-size: 18px; line-height: 1.55; color: var(--ink-2); max-width: 460px; }
+
+  .channels-section { padding: 0 40px 60px; max-width: 1280px; margin: 0 auto; }
+  .channels-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .channel { padding: 28px 28px 28px 0; border-right: 1px solid var(--hairline); }
+  .channel:nth-child(1) { padding-left: 0; }
+  .channel:nth-child(2) { padding-left: 28px; }
+  .channel:nth-child(3) { padding-left: 28px; border-right: none; }
+  .channel .v { font-family: var(--font-display); font-size: 22px; letter-spacing: -0.01em; line-height: 1.15; margin-top: 6px; }
+  .channel .sub { font-size: 12px; color: var(--ink-muted); margin-top: 6px; }
+
+  .form-section { padding: 40px 40px 100px; max-width: 1280px; margin: 0 auto; }
+  .form-grid { display: grid; grid-template-columns: 320px 1fr; gap: 60px; }
+
+  .intents { margin-top: 20px; display: grid; gap: 8px; }
+  .intent-btn {
+    justify-content: flex-start; align-items: flex-start;
+    display: flex; flex-direction: column; gap: 3px;
+    text-align: left;
+    padding: 16px 18px; border-radius: 14px;
+    border: 1px solid var(--hairline);
+    background: transparent; color: var(--ink);
+    transition: all .15s; cursor: pointer; font: inherit;
+  }
+  .intent-btn:hover { border-color: var(--hairline-strong); }
+  .intent-btn[aria-selected="true"] {
+    border: 1px solid var(--ink);
+    background: var(--ink); color: var(--paper);
+  }
+  .intent-btn .row { font-size: 16px; font-weight: 500; display: flex; align-items: center; gap: 10px; width: 100%; }
+  .intent-btn .row .arrow { margin-left: auto; font-size: 13px; display: none; }
+  .intent-btn[aria-selected="true"] .row .arrow { display: inline; }
+  .intent-btn .sub { font-size: 12px; opacity: 0.6; font-weight: 400; }
+  .intent-btn[aria-selected="true"] .sub { opacity: 0.75; }
+
+  .intent-note {
+    margin-top: 24px; padding: 20px;
+    background: var(--cream);
+    border-radius: 14px; border: 1px solid var(--hairline);
+    display: none;
+  }
+  .intent-note.active { display: block; }
+  .intent-note p { font-size: 13px; line-height: 1.55; color: var(--ink-2); }
+  .intent-note .otc-eyebrow { color: var(--moss); margin-bottom: 10px; }
+
+  .form-card { background: var(--cream); border-radius: 24px; border: 1px solid var(--hairline); padding: 40px; }
+  .form-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--hairline); gap: 16px; flex-wrap: wrap; }
+  .form-head h2 { font-size: 34px; margin-top: 10px; letter-spacing: -0.02em; }
+  .form-title { display: none; }
+  .form-title.active { display: block; }
+  .required-note { font-size: 12px; color: var(--ink-muted); }
+
+  .form-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 20px; }
+  .field { display: none; }
+  .field.active { display: block; }
+  .field.full { grid-column: 1 / -1; }
+  .field label { display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 10px; }
+  .field label .req { color: var(--ember); }
+  .field textarea.otc-input { resize: vertical; font-family: inherit; padding-top: 8px; padding-bottom: 8px; }
+
+  .submit-row { margin-top: 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .consent-label { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; color: var(--ink-muted); max-width: 440px; line-height: 1.5; }
+
+  /* Map + FAQ */
+  .map-faq-section { padding: 20px 40px 100px; max-width: 1280px; margin: 0 auto; }
+  .map-faq-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; }
+  .map-wrap {
+    position: relative; border-radius: 20px; overflow: hidden; height: 420px;
+    background-image: url('https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=1200&q=70');
+    background-size: cover; background-position: center;
+  }
+  .map-scrim { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.55)); }
+  .pin { position: absolute; transform: translate(-50%,-100%); text-align: center; }
+  .pin-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--ember); border: 3px solid var(--paper); box-shadow: 0 4px 14px rgba(0,0,0,0.4); margin: 0 auto; }
+  .pin-label { font-family: var(--font-mono); font-size: 10px; color: var(--paper); letter-spacing: 0.1em; margin-top: 6px; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+  .map-title { position: absolute; bottom: 24px; left: 24px; color: var(--paper); font-family: var(--font-display); }
+  .map-title .big { font-size: 28px; letter-spacing: -0.01em; }
+  .map-title .small { font-size: 13px; opacity: 0.85; font-family: var(--font-body); margin-top: 4px; }
+
+  .faq h2 { font-size: 40px; margin-top: 14px; letter-spacing: -0.02em; margin-bottom: 28px; }
+  details { border-bottom: 1px solid var(--hairline); padding: 18px 0; }
+  details summary { cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; font-size: 17px; font-weight: 500; }
+  details summary::-webkit-details-marker { display: none; }
+  details summary .plus { font-size: 20px; color: var(--ember); margin-left: 16px; transition: transform .2s; }
+  details[open] summary .plus { transform: rotate(45deg); }
+  details p { margin-top: 12px; font-size: 14px; line-height: 1.6; color: var(--ink-muted); }
+
+  @media (max-width: 960px) {
+    .contact-hero { padding: 60px 24px 32px; }
+    .contact-hero h1 { font-size: 56px; }
+    .contact-hero-grid, .form-grid, .channels-grid, .form-fields, .map-faq-grid { grid-template-columns: 1fr; }
+    .channel { padding: 16px 0 !important; border-right: none; border-bottom: 1px solid var(--hairline); }
+    .channel:last-child { border-bottom: none; }
+    .form-section, .channels-section, .map-faq-section { padding: 48px 24px; }
+    .form-card { padding: 24px; }
+    .form-head h2 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="otc-nav">
+  <a class="otc-logo" href="index.html">
+    <span class="otc-logo-mark">o</span>
+    <span>Outside The City</span>
+  </a>
+  <div class="otc-nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="involved.html">Get Involved</a>
+    <a class="active" href="contact.html">Contact</a>
+    <a href="donate.html">Donate</a>
+  </div>
+  <div class="otc-nav-cta">
+    <a class="otc-btn otc-btn-ghost" href="involved.html">Volunteer</a>
+    <a class="otc-btn otc-btn-ember" href="donate.html">Donate →</a>
+  </div>
+</nav>
+
+<section class="contact-hero">
+  <div class="contact-hero-grid">
+    <div>
+      <div class="otc-eyebrow">Contact · serving Orange, San Diego, LA counties + beyond</div>
+      <h1>Say hello.<br/><span class="italic ember">We'll write back.</span></h1>
+    </div>
+    <p>
+      Every message reaches a real person on the team. Volunteers, partners, press, and
+      product donations all go through here — pick the lane that fits.
+    </p>
+  </div>
+</section>
+
+<section class="channels-section">
+  <div class="channels-grid">
+    <div class="channel">
+      <div class="otc-eyebrow">Email</div>
+      <div class="v">info@outsidethecity.org</div>
+      <div class="sub">Replied to within 24h (weekdays)</div>
+    </div>
+    <div class="channel">
+      <div class="otc-eyebrow">Serving</div>
+      <div class="v">Southern California</div>
+      <div class="sub">Orange · San Diego · LA · and beyond</div>
+    </div>
+    <div class="channel">
+      <div class="otc-eyebrow">Parent org</div>
+      <div class="v">Teen Health, Inc.</div>
+      <div class="sub">501(c)(3) · EIN 87-4628884</div>
+    </div>
+  </div>
+</section>
+
+<section class="form-section">
+  <div class="form-grid">
+    <div>
+      <div class="otc-eyebrow">I'm reaching out about…</div>
+      <div class="intents" role="radiogroup" aria-label="Reason for contact">
+        <button class="intent-btn" data-intent="general" aria-selected="true" type="button">
+          <span class="row">General <span class="arrow">→</span></span>
+          <span class="sub">Questions, hellos, ideas</span>
+        </button>
+        <button class="intent-btn" data-intent="volunteer" aria-selected="false" type="button">
+          <span class="row">Volunteer <span class="arrow">→</span></span>
+          <span class="sub">Guides, team builders, athletes, seniors, lifeguards</span>
+        </button>
+        <button class="intent-btn" data-intent="corporate" aria-selected="false" type="button">
+          <span class="row">Corporate & CSR <span class="arrow">→</span></span>
+          <span class="sub">Sponsorship, employee engagement, matching</span>
+        </button>
+        <button class="intent-btn" data-intent="product" aria-selected="false" type="button">
+          <span class="row">Product donations <span class="arrow">→</span></span>
+          <span class="sub">Gear, equipment, bikes</span>
+        </button>
+        <button class="intent-btn" data-intent="press" aria-selected="false" type="button">
+          <span class="row">Press & media <span class="arrow">→</span></span>
+          <span class="sub">Interviews, photography, press kits</span>
+        </button>
+      </div>
+
+      <div class="intent-note" data-note="volunteer">
+        <div class="otc-eyebrow">Good to know</div>
+        <p>Life experience counts. We especially welcome mentors with time in the military, trades, and community leadership.</p>
+      </div>
+      <div class="intent-note" data-note="corporate">
+        <div class="otc-eyebrow">Typical engagements</div>
+        <p>Outing sponsorship · employee volunteer days · skills-based engagement · matching · multi-year commitments. Impact reporting included.</p>
+      </div>
+      <div class="intent-note" data-note="product">
+        <div class="otc-eyebrow">We accept</div>
+        <p>Camping, hiking, water sports gear, and bikes — new or used. Tax-deductible receipts issued in 2 business days.</p>
+      </div>
+      <div class="intent-note" data-note="press">
+        <div class="otc-eyebrow">Press kit</div>
+        <p>High-res photography, video, drone footage, and founder bios available on request.</p>
+      </div>
+    </div>
+
+    <form class="form-card" onsubmit="event.preventDefault();">
+      <div class="form-head">
+        <div>
+          <div class="otc-eyebrow" id="form-subtitle">Form · general</div>
+          <h2 class="form-title active" data-title="general">Send us a note.</h2>
+          <h2 class="form-title" data-title="volunteer">Come join the team.</h2>
+          <h2 class="form-title" data-title="corporate">Let's build something.</h2>
+          <h2 class="form-title" data-title="product">Let's coordinate.</h2>
+          <h2 class="form-title" data-title="press">What's the story?</h2>
+        </div>
+        <div class="required-note">* required</div>
+      </div>
+
+      <div class="form-fields">
+        <!-- GENERAL -->
+        <div class="field active" data-intents="general"><label>Your name<span class="req"> *</span></label><input class="otc-input" placeholder="Your full name" required /></div>
+        <div class="field active" data-intents="general"><label>Email<span class="req"> *</span></label><input class="otc-input" type="email" placeholder="you@domain.com" required /></div>
+        <div class="field active full" data-intents="general"><label>What's on your mind?<span class="req"> *</span></label><textarea class="otc-input" rows="4" placeholder="Tell us anything — feedback, a question, a hello." required></textarea></div>
+
+        <!-- VOLUNTEER -->
+        <div class="field" data-intents="volunteer"><label>Your name<span class="req"> *</span></label><input class="otc-input" placeholder="Your full name" /></div>
+        <div class="field" data-intents="volunteer"><label>Email<span class="req"> *</span></label><input class="otc-input" type="email" placeholder="you@domain.com" /></div>
+        <div class="field" data-intents="volunteer"><label>Where are you based?<span class="req"> *</span></label><input class="otc-input" placeholder="Orange · San Diego · LA · Inland Empire…" /></div>
+        <div class="field" data-intents="volunteer"><label>Role you're drawn to<span class="req"> *</span></label><input class="otc-input" placeholder="Wilderness Guide · Lifeguard · Team Builder…" /></div>
+        <div class="field full" data-intents="volunteer"><label>Relevant experience<span class="req"> *</span></label><textarea class="otc-input" rows="4" placeholder="Guiding, lifeguarding, mentoring, military, trades — life experience counts."></textarea></div>
+
+        <!-- CORPORATE -->
+        <div class="field" data-intents="corporate"><label>Your name<span class="req"> *</span></label><input class="otc-input" placeholder="Your full name" /></div>
+        <div class="field" data-intents="corporate"><label>Company<span class="req"> *</span></label><input class="otc-input" placeholder="Organization name" /></div>
+        <div class="field" data-intents="corporate"><label>Work email<span class="req"> *</span></label><input class="otc-input" type="email" placeholder="you@company.com" /></div>
+        <div class="field" data-intents="corporate"><label>Engagement type<span class="req"> *</span></label><input class="otc-input" placeholder="Sponsorship · employee day · matching · multi-year" /></div>
+        <div class="field full" data-intents="corporate"><label>What you're imagining<span class="req"> *</span></label><textarea class="otc-input" rows="4" placeholder="Rough shape, budget range, timing, CSR priorities."></textarea></div>
+
+        <!-- PRODUCT -->
+        <div class="field" data-intents="product"><label>Your name<span class="req"> *</span></label><input class="otc-input" placeholder="Your full name" /></div>
+        <div class="field" data-intents="product"><label>Email<span class="req"> *</span></label><input class="otc-input" type="email" placeholder="you@domain.com" /></div>
+        <div class="field" data-intents="product"><label>Category<span class="req"> *</span></label><input class="otc-input" placeholder="Camping · hiking · water · bikes…" /></div>
+        <div class="field" data-intents="product"><label>Approx quantity<span class="req"> *</span></label><input class="otc-input" placeholder="e.g. 12 tents, 1 kayak, 30 sleeping bags" /></div>
+        <div class="field" data-intents="product"><label>Condition<span class="req"> *</span></label><input class="otc-input" placeholder="New · gently used · needs repair" /></div>
+        <div class="field" data-intents="product"><label>Ship or drop off<span class="req"> *</span></label><input class="otc-input" placeholder="Shipping / appointment drop-off" /></div>
+        <div class="field full" data-intents="product"><label>Anything else?<span class="req"> *</span></label><textarea class="otc-input" rows="3" placeholder="Photos welcome as a follow-up email."></textarea></div>
+
+        <!-- PRESS -->
+        <div class="field" data-intents="press"><label>Your name<span class="req"> *</span></label><input class="otc-input" placeholder="Reporter · Producer…" /></div>
+        <div class="field" data-intents="press"><label>Outlet<span class="req"> *</span></label><input class="otc-input" placeholder="Publication or network" /></div>
+        <div class="field" data-intents="press"><label>Email<span class="req"> *</span></label><input class="otc-input" type="email" placeholder="you@outlet.com" /></div>
+        <div class="field" data-intents="press"><label>Deadline<span class="req"> *</span></label><input class="otc-input" placeholder="Fri Aug 22" /></div>
+        <div class="field full" data-intents="press"><label>Story + what you need<span class="req"> *</span></label><textarea class="otc-input" rows="4" placeholder="A few lines on the piece, photography needs, interviewees…"></textarea></div>
+      </div>
+
+      <div class="submit-row">
+        <label class="consent-label">
+          <input type="checkbox" checked style="margin-top: 3px;" />
+          <span>I'm okay with Outside The City keeping my message on file. We never sell or share contact info.</span>
+        </label>
+        <button class="otc-btn otc-btn-ember otc-btn-lg" type="submit" id="submit-btn">Send message →</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="map-faq-section">
+  <div class="map-faq-grid">
+    <div class="map-wrap">
+      <div class="map-scrim"></div>
+      <div class="pin" style="left:30%; top:40%;">
+        <div class="pin-dot"></div>
+        <div class="pin-label">LA COUNTY</div>
+      </div>
+      <div class="pin" style="left:42%; top:58%;">
+        <div class="pin-dot"></div>
+        <div class="pin-label">ORANGE</div>
+      </div>
+      <div class="pin" style="left:56%; top:72%;">
+        <div class="pin-dot"></div>
+        <div class="pin-label">SAN DIEGO</div>
+      </div>
+      <div class="map-title">
+        <div class="big">Southern California</div>
+        <div class="small">Orange · San Diego · LA · and beyond</div>
+      </div>
+    </div>
+
+    <div class="faq">
+      <div class="otc-eyebrow">Quick answers</div>
+      <h2>Before you write.</h2>
+      <details>
+        <summary>Who do you serve?<span class="plus">+</span></summary>
+        <p>Formerly gang-involved and previously incarcerated men and women in Orange, San Diego, and LA counties — and we travel beyond when trips call for it.</p>
+      </details>
+      <details>
+        <summary>Is there a cost for participants?<span class="plus">+</span></summary>
+        <p>No. Every outing — gear, food, transport, guides — is free, funded by donors and corporate partners.</p>
+      </details>
+      <details>
+        <summary>How fast do you reply?<span class="plus">+</span></summary>
+        <p>General & volunteer: within 2 business days. Corporate & product donations: same week. Press: same day during active outings.</p>
+      </details>
+      <details>
+        <summary>Can I volunteer without outdoor experience?<span class="plus">+</span></summary>
+        <p>Yes — several of our roles (Team Builders, Seniors) rely more on life experience and presence than on trail skills.</p>
+      </details>
+      <details>
+        <summary>Are donations tax-deductible?<span class="plus">+</span></summary>
+        <p>Yes. We operate under Teen Health, Inc., a 501(c)(3). EIN 87-4628884.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="otc-footer">
+  <div class="otc-footer-grid">
+    <div>
+      <h2 class="otc-footer-cta-h">
+        Adventure. Healing.<br/>
+        <span class="italic">Second chances.</span>
+      </h2>
+      <p style="font-size:13px; color:rgba(245,239,228,0.6); margin-bottom:20px; max-width:380px; line-height:1.55;">
+        Monthly updates from the field. First outings, first summits, first stars.
+      </p>
+      <form class="otc-footer-subscribe" onsubmit="event.preventDefault();">
+        <input class="otc-input" placeholder="your@email.com" type="email" required />
+        <button class="otc-btn otc-btn-ember" type="submit">Subscribe</button>
+      </form>
+    </div>
+    <div>
+      <div class="otc-eyebrow" style="color: rgba(245,239,228,0.5); margin-bottom: 14px;">Explore</div>
+      <div style="display:grid; gap:8px;">
+        <a href="about.html">About</a>
+        <a href="about.html#team">Team</a>
+        <a href="involved.html">Get Involved</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="otc-eyebrow" style="color: rgba(245,239,228,0.5); margin-bottom: 14px;">Support</div>
+      <div style="display:grid; gap:8px;">
+        <a href="donate.html">Donate</a>
+        <a href="donate.html#product">Product donations</a>
+        <a href="involved.html">Volunteer</a>
+        <a href="involved.html#corporate">Corporate sponsors</a>
+      </div>
+    </div>
+    <div>
+      <div class="otc-eyebrow" style="color: rgba(245,239,228,0.5); margin-bottom: 14px;">Reach us</div>
+      <div style="display:grid; gap:8px;">
+        <a href="mailto:info@outsidethecity.org">info@outsidethecity.org</a>
+        <a href="contact.html">Press</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://twitter.com" target="_blank" rel="noopener">Twitter / X</a>
+      </div>
+    </div>
+  </div>
+  <div class="otc-footer-legal">
+    <div style="display:flex; gap:24px; flex-wrap:wrap;">
+      <span>© 2026 Outside The City</span>
+      <span>Powered by Teen Health, Inc. · 501(c)(3) · EIN 87-4628884</span>
+    </div>
+    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+      <a href="#">Terms of Service</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Refund Policy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const INTENT_CTAS = {
+    general:   "Send message",
+    volunteer: "Apply to volunteer",
+    corporate: "Start the conversation",
+    product:   "Offer a donation",
+    press:     "Send press request",
+  };
+  const INTENT_LABELS = {
+    general: "general", volunteer: "volunteer", corporate: "corporate & csr",
+    product: "product donations", press: "press & media"
+  };
+
+  const intentButtons = document.querySelectorAll('.intent-btn');
+  const notes         = document.querySelectorAll('.intent-note');
+  const titles        = document.querySelectorAll('.form-title');
+  const fields        = document.querySelectorAll('.field');
+  const subtitle      = document.getElementById('form-subtitle');
+  const submitBtn     = document.getElementById('submit-btn');
+
+  function setIntent(intent) {
+    intentButtons.forEach(b => b.setAttribute('aria-selected', b.dataset.intent === intent));
+    notes.forEach(n => n.classList.toggle('active', n.dataset.note === intent));
+    titles.forEach(t => t.classList.toggle('active', t.dataset.title === intent));
+    fields.forEach(f => f.classList.toggle('active', f.dataset.intents === intent));
+    subtitle.textContent = 'Form · ' + INTENT_LABELS[intent];
+    submitBtn.textContent = INTENT_CTAS[intent] + ' →';
+  }
+  intentButtons.forEach(b => b.addEventListener('click', () => setIntent(b.dataset.intent)));
+</script>
+
+</body>
+</html>
